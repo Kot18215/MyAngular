@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <script type="text/javascript" src="jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="controllers.js"></script>
+    <script type="text/javascript" src="filters.js"></script>
+    <script type="text/javascript" src="directives.js"></script>
+
+</head>
+<body>
+<div ng-controller="Contorller1">
+
+<form name="myForm">
+<div>Введите значения</div>
+<table>
+	<tbody>
+		<tr><td>
+			<input type="text" id="input1" placeholder="Название" ng-model="newItem.name"/>
+		</td></tr>
+
+		<tr><td>
+			<input list="myList" type="text" id="input2" placeholder="Приоритет" ng-model="newItem.priority"/>
+				<datalist id="myList">
+					<option value = "Высокий">
+					<option value = "Средний">
+					<option value = "Низкий">
+				</datalist>
+		</td></tr>
+
+		<tr><td>
+			<input type="text" id="input3" placeholder="Исполнитель" ng-model="newItem.ispoln"/>
+		</td></tr>
+
+		<tr><td>
+			<button ng-click="add()">Добавить запись</button>
+		</td></tr>
+
+	</tbody>
+</table>
+</form>
+
+<table><tbody>
+	<tr>
+		<td><div>Актуальные задачи</div></td>
+		<td>
+			<input list="myList" type="text" id="input2" placeholder="Фильтр" ng-model="filterName"/>
+				<datalist id="myList">
+					<option value = "Высокий">
+					<option value = "Средний">
+					<option value = "Низкий">
+				</datalist>
+		</td>
+	</tr>
+</tbody></table>
+
+<select ng-model="filterName">
+					<option></option>
+					<option>Высокий</option>
+					<option>Средний</option>
+					<option>Низкий</option>
+</select>
+				
+<table id="table1" >
+    <tbody><tr ng-repeat="i in items | filter:{priority:filterName}"><td>{{i.name}}</td><td testcolor>{{i.priority}}</td><td>{{i.ispoln}}</td><td><button ng-click="replace(i.name, i.priority, i.ispoln, i)">Готово!</button></td><td><button ng-click="del(i)">Удалить</button></td></tr></tbody>
+</table>
+</br>
+<div>Архив</div>
+<table id="table2" >
+    <tbody><tr ng-repeat="i in items2"><td>{{i.name}}</td><td>{{i.priority}}</td><td>{{i.ispoln}}</td></tr></tbody>
+</table>
+</div>
+
+</body>
+</html>
